@@ -1,32 +1,38 @@
 package print9_sort_1.util;
 
 public class Logger {
-	/**
-	 * mesgをprintlnする
-	 * @param mesg
-	 */
-	private void print (String mesg) {
-		System.out.println(mesg);
-	}
-	
-	/**
-	 * 処理未記入
-	 * @param arr
-	 * @param beg
-	 * @param len
-	 * @return
-	 */
-	private String toString(int[] arr, int beg,int len) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("[");
-		for (int i = beg; i < len;i++) {
-			sb.append(arr[i]);
-			if (i != len - 1)	sb.append(",");
-		}
-		sb.append("]");
-		
-		return sb.toString();
-	}
 
+    /**
+     * ログ出力
+     * @param msg
+     */
+    public void print(String msg) {
+        System.out.println(msg);
+    }
+
+    /**
+     * 配列を出力する
+     * @param arr
+     * @param beg
+     * @param len
+     */
+    public void print(int[] arr, int beg, int len) {
+        this.print(this.toString(arr, beg, len));
+    }
+
+    /**
+     * int[]を文字列で表現する
+     * @param arr
+     * @param beg
+     * @param len
+     * @return
+     */
+    public String toString(int[] arr, int beg, int len) {
+    	StringBuffer sb = new StringBuffer();
+    	for (int i = beg; i < beg+len; i++) {
+    		sb.append(", %2d".formatted(arr[i]));
+    	}
+    	return "[%s]".formatted(sb.substring(1));    	
+    }
 }
 
