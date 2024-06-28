@@ -5,30 +5,30 @@ public class Rectangle extends Shape{
 	private int height; //高さ
 	
 	Rectangle(int width,int height){
-		this.setWigth(width);
+		this.setWidth(width);
 		this.setHeight(height);
 	}
 	
-	void setWigth(int width){
-		this.width = width;
-	}
-	
-	void setHeight(int height) {
-		this.height = height;
-	}
-	
-	int getWigth() {
-		return this.width;
-	}
-	
-	int getHeight() {
-		return this.height;
-	}
+//	void setWigth(int width){
+//		this.width = width;
+//	}
+//	
+//	void setHeight(int height) {
+//		this.height = height;
+//	}
+//	
+//	int getWigth() {
+//		return this.width;
+//	}
+//	
+//	int getHeight() {
+//		return this.height;
+//	}
 	
 	@Override
 	void draw() {
-		int w = getWigth();
-		int h = getHeight();
+		int w = this.getWidth();
+		int h = this.getHeight();
 		
 		for (int i = 0; i < h; i++) {
 			for (int k = 0; k < w; k++) {
@@ -37,5 +37,33 @@ public class Rectangle extends Shape{
 			System.out.println();
 		}
 		System.out.println();
+	}
+
+	/**
+	 * @return width
+	 */
+	public int getWidth() {
+		return width;
+	}
+
+	/**
+	 * @param width セットする width
+	 */
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	/**
+	 * @return height
+	 */
+	public int getHeight() {
+		return height;
+	}
+
+	/**
+	 * @param height セットする height
+	 */
+	public void setHeight(int height) {
+		this.height = height;
 	}
 }
