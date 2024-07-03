@@ -1,6 +1,6 @@
-package printD1_queue_1;
+package printD1_queue_1.queue;
 
-public interface Node {
+interface Node {
 	
 	void setValue(Object obj);
 	

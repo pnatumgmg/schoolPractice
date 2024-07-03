@@ -1,11 +1,11 @@
-package printD1_queue_1;
+package printD1_queue_1.queue;
 
 public class LinkedCharQueue implements Queue{
 	private Node root;
 	
-	LinkedCharQueue() {}
+	public LinkedCharQueue() {}
 	
-	LinkedCharQueue(String str){
+	public LinkedCharQueue(String str){
 		append(str);
 	}
 	
@@ -86,13 +86,13 @@ class CharNode implements Node{
 	private char value;
 	private Node next;
 	
-	CharNode(char value){
-		setValue(value);
+	public CharNode(char value){
+		this.setValue(value);
 	}
 	
 	@Override
 	public void setValue(Object obj){
-		setValue((char)obj);
+		this.setValue((char)obj);
 	}
 	
 	
@@ -104,7 +104,7 @@ class CharNode implements Node{
 	@Override
 	//多分済
 	public Object getValue() {
-		return (Object)value;
+		return (Object)this.value;
 	}
 	
 	@Override
