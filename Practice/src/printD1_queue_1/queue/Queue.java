@@ -1,4 +1,4 @@
-package printD1_queue_1;
+package printD1_queue_1.queue;
 
 public interface Queue {
 	Queue append(String str);
