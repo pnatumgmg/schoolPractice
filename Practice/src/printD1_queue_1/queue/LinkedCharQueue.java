@@ -87,12 +87,12 @@ class CharNode implements Node{
 	private Node next;
 	
 	public CharNode(char value){
-		setValue(value);
+		this.setValue(value);
 	}
 	
 	@Override
 	public void setValue(Object obj){
-		setValue((char)obj);
+		this.setValue((char)obj);
 	}
 	
 	
@@ -104,7 +104,7 @@ class CharNode implements Node{
 	@Override
 	//多分済
 	public Object getValue() {
-		return (Object)value;
+		return (Object)this.value;
 	}
 	
 	@Override
