@@ -7,8 +7,6 @@ import print9_sort_1.algorithm.bubble.BubbleSort;
 import print9_sort_1.util.Logger;
 
 public class SortDriver{
-	
-	
 
     public static void main(String[] args) {
     	
@@ -48,4 +46,3 @@ public class SortDriver{
         return sb.toString();
     }
 }
-

@@ -44,7 +44,7 @@ public class AnimalTester {
 		Sheep hituzi_1 = new Sheep("ショーン","羊",5,"並");
 		Cat neko_2 = new Cat("ミミ","猫",3,"まぐろ缶");
 		Dog inu_2 = new Dog("しろ","犬",8,"公園");
-		Cat neko_3 = new Cat("すず","猫",4,"つおぶし");
+		Cat neko_3 = new Cat("すず","猫",4,"かつおぶし");
 		Animal[] animals = {inu_1,neko_1,hituzi_1,neko_2,inu_2,neko_3};
 		
 		//8
@@ -67,21 +67,24 @@ public class AnimalTester {
 	public static void anderLine() {
 		System.out.println("---------------");
 	}
-	
+	//9
 	public static void animalCount(Animal[] animals) {
 		int dogCount = 0;
 		int catCount = 0;
 		int sheepCount = 0;
 		for (Animal a:animals) {
-			switch (a.getKind()) {
-			case "犬":
+			switch (a) {
+			case Dog d:
 				dogCount ++;
 				break;
-			case "猫":
+			case Cat c:
 				catCount ++;
 				break;
-			case "羊":
+			case Sheep s:
 				sheepCount ++;
+				break;
+			default:
+				System.out.println("あなた誰ですか？？");
 				break;
 			}
 		}
