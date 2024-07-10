@@ -66,6 +66,4 @@ public class BrassBandClub {
 		}
 		return false;
 	}
-	
-
 }

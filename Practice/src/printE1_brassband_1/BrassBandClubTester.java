@@ -29,7 +29,5 @@ public class BrassBandClubTester {
 		
 		//2-3
 		BrassBandClub.containsMember(maruv2, bbcs);
-		
 	}
-
 }

@@ -35,7 +35,7 @@ public class LinkedCharQueue implements Queue{
 		if (prev == null) {
 			Node pika = get(idx);
 			Node next = pika.getNext();
-			root  = next;
+			this.root = next;
 			return this;
 		}
 		Node tgt = prev.getNext();
@@ -137,4 +137,3 @@ class CharNode implements Node{
 		return String.valueOf(this.getValue());
 	}
 }
-
