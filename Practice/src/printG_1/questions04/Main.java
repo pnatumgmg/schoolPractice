@@ -13,10 +13,12 @@ public class Main {
 		for(int i = 0;i < 5;i++) {
 			String input = sc.nextLine();
 			String[] inputS = input.split(" ");
-			sb.append("," + inputS[0]);
 			weather.put(inputS[0], inputS[1]);
 		}
 		
+		for(String a:weather.keySet()) {
+			sb.append("," + a);
+		}
 		System.out.println(sb.toString().substring(1));
 		
 		System.out.println("表示したい年を入力してください");
@@ -30,5 +32,4 @@ public class Main {
 		
 		sc.close();
 	}
-
 }

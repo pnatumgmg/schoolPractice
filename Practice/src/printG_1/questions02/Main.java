@@ -22,5 +22,4 @@ public class Main {
 		int min = Collections.min(inputNum);
 		System.out.println("最小値：" + min);
 	}
-
 }
