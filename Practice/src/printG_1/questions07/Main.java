@@ -1,6 +1,5 @@
 package printG_1.questions07;
 
-
 import java.util.LinkedHashSet;
 import java.util.Random;
 import java.util.Scanner;
@@ -20,19 +19,14 @@ public class Main {
 		int key = sc.nextInt();
 		sc.close();
 		//(5)
-		LinkedHashSet<Integer> lSet = new LinkedHashSet<>();
-		Set<Integer> set = getSet(n);
-		if(set instanceof LinkedHashSet) {
-			lSet = (LinkedHashSet<Integer>) set;
-		}else {
-			System.out.println("型が違うよ；；");
-		}
+		Set<Integer> set = new LinkedHashSet<>();
+		set = getSet(n);
 		//(6)
-		int index = getNum(lSet,key);
+		int index = getNum(set,key);
 		//(7)
 		printIndex(index);
 		//(8)
-		showSet(lSet);
+		showSet(set);
 	}
 	
 	static Set<Integer> getSet(int count){
@@ -65,7 +59,7 @@ public class Main {
 		if (index < 0) {
 			System.out.println("その値は要素に存在しません");
 		}else {
-			System.out.println("「その値は%d番目にあります"
+			System.out.println("その値は%d番目にあります"
 					.formatted(index));
 		}
 	}

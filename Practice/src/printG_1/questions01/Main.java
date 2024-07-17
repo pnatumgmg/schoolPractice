@@ -1,6 +1,7 @@
 package printG_1.questions01;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 
 public class Main {
@@ -30,6 +31,7 @@ public class Main {
 		for (int i = 0;i < a.size();i++) {
 			if(a.get(i) >= 100) {
 				a.remove(i);
+				i--;
 			}
 		}
 		//(8)
@@ -37,7 +39,8 @@ public class Main {
 			System.out.println(i);
 		}
 		//(9)
-		a.sort(null);
+//		a.sort(null);
+		Collections.sort(a);
 		for(int i:a) {
 			System.out.println(i);
 		}
@@ -50,5 +53,4 @@ public class Main {
 			System.out.println("変数a の中身は空ではありません");
 		}
 	}
-
 }

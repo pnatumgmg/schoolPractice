@@ -50,7 +50,7 @@ public class Main {
 			p.age = age;
 			p.height = height;
 			//7
-			persons.add(p);
+			persons.add(p);	
 		}
 	}
 	
@@ -61,7 +61,4 @@ public class Main {
 			System.out.println("身長：" + p.height);
 		}
 	}
-
 }
-
-
