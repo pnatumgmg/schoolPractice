@@ -25,9 +25,9 @@ public class Main {
 		
 		show(aa);
 		
-//		Collections.reverse(aa);
+		Collections.reverse(aa);
 		
-//		show(aa);
+		show(aa);
 		
 	}
 	
