@@ -9,8 +9,6 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 		
 		ArrayList<Person> ap = new ArrayList<Person>();
-//		ArrayList<Person> aa = new ArrayList<Person>();
-		
 		
 		Person c = new Person("Charlie",20,170,70);
 		Person b = new Person("Bob",15,165,55);
@@ -26,7 +24,7 @@ public class Main {
 		int sortNumber = sc.nextInt();
 		
 		Collections.sort(ap,new PersonComparator(sortNumber));
-				
+		
 		show(ap);
 		
 		sc.close();
@@ -38,5 +36,4 @@ public class Main {
 					.formatted(aa.get(i).getName(),aa.get(i).getAge(),aa.get(i).getHeight(),aa.get(i).getWeight()));
 		}
 	}
-
 }
