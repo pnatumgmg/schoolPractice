@@ -104,24 +104,34 @@ public class Account {
 	}
 	
 	public static int chkAccountNum(ArrayList<Account> aa,int a) {
-//		return aa.indexOf(a);
-		int count = 0;
-		for(Account ac:aa) {
-			if(ac.getAccountNum() == a) {
-				return count;
-			}
-			count ++;
-		}
-		return -1;
+		Account a1 = newAccount.cAccount(a);
+		return aa.indexOf(a1);
+//		int count = 0;
+//		for(Account ac:aa) {
+//			if(ac.getAccountNum() == a) {
+//				return count;
+//			}
+//			count ++;
+//		}
+//		return -1;
 	}
 	
 	@Override
 	public boolean equals(Object object) {
-		int a = (int)object;
-		if(this.getAccountNum() == a) {
-			return true;
+		if(object instanceof Account a) {
+			if(this.getAccountNum() == a.getAccountNum()) {
+				return true;
+			}
 		}
+		
 		return false;
 	}
+	
+}
 
+class newAccount{
+	public static Account cAccount(int a) {
+		Account a1 = new Account("check",0,a);
+		return a1;
+	}
 }
