@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 
 public class AccessDB {
 	private Connection conn;
@@ -43,14 +42,14 @@ public class AccessDB {
 		}
 	}
 
-	public List<M_goods> getgoodsList(){
-		List<M_goods> l1 = new ArrayList<M_goods>();
-		
+	public ArrayList<M_goods> getgoodsList(){
+		ArrayList<M_goods> l1 = new ArrayList<M_goods>();
+
 		String sql = "select * from m_goods";
 		connect();
-		
+
 		try(PreparedStatement pstmt = conn.prepareStatement(sql);){
-			
+
 			ResultSet result = pstmt.executeQuery();
 
 			while(result.next()) {
@@ -61,9 +60,9 @@ public class AccessDB {
 				Date d1 = result.getDate("update_date");
 				String strDate = d1.toString();
 				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-			    java.util.Date date = format.parse(strDate);
-			    
-			    l1.add(new M_goods(itemcode,itemname,supcode,price,date));
+				java.util.Date date = format.parse(strDate);
+
+				l1.add(new M_goods(itemcode,itemname,supcode,price,date));
 			}
 		}catch (SQLException | ParseException e) {
 			// TODO: handle exception
@@ -71,18 +70,16 @@ public class AccessDB {
 		disConnect();
 		return l1;
 	}
-	
-	
-	
-	public List<M_supplier> getSupplierList() {
-		List<M_supplier> l1 = new ArrayList<M_supplier>();
+
+	public ArrayList<M_supplier> getSupplierList() {
+		ArrayList<M_supplier> l1 = new ArrayList<M_supplier>();
 
 		String sql = "select * from m_supplier";
 
 		connect();
-		
+
 		try (PreparedStatement pstmt = conn.prepareStatement(sql);){
-			
+
 			ResultSet result = pstmt.executeQuery();
 
 			while(result.next()) {
@@ -94,10 +91,10 @@ public class AccessDB {
 				Date d1 = result.getDate("update_date");
 				String strDate = d1.toString();
 				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-			    java.util.Date date = format.parse(strDate);
-				
+				java.util.Date date = format.parse(strDate);
+
 				l1.add(new M_supplier(supcode,supname,address,tel,repName,date));
-				
+
 			}
 		} catch (SQLException | ParseException e) {
 			// TODO 自動生成された catch ブロック
@@ -106,7 +103,134 @@ public class AccessDB {
 		disConnect();
 		return l1;
 	}
-	
-	
 
+	public M_goods getGoods(int goodscode) {
+		M_goods mg = new M_goods();
+		M_supplier ms = new M_supplier();
+		String sql ="""
+				select g.itemname as 商品名
+					  ,s.supname as 仕入先名
+					  ,s.address as 仕入先住所
+					  ,g.price as 価格
+				  from m_goods g
+				  left join m_supplier s
+				    on g.supcode = s.supcode
+				 where itemcode = %d
+				""".formatted(goodscode);
+
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet result = pstmt.executeQuery();
+
+			while(result.next()) {
+				String itemName = result.getString("商品名");
+				String supName = result.getString("仕入先名");
+				String address = result.getString("仕入先住所");
+				int price = result.getInt("価格");
+				mg.setItemname(itemName);
+				mg.setPrice(price);
+				ms.setSupname(supName);
+				ms.setAddress(address);
+				mg.setSup(ms);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return mg;
+	}
+	
+	public int deleteFromM_goods(int goodscode) {
+		int count = 0;
+		String sql = "delete from m_goods where itemcode = %d".formatted(goodscode);
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql);){
+			count = pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			return -1;
+		}
+		return count;
+	}
+	
+	public int insertM_goods(M_goods goods) {
+		int count = 0;
+		String sql = """
+					insert into m_goods(ITEMCODE,ITEMNAME,SUPCODE,PRICE,UPDATE_DATE)
+					values(?,?,?,?,?)
+					""";
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql);){
+			pstmt.setInt(1, goods.getItemcode());
+			pstmt.setString(2, goods.getItemname());
+			pstmt.setInt(3, goods.getSupcode());
+			pstmt.setInt(4, goods.getPrice());
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+			String strDate = sf.format(goods.getUpdate_date());
+			java.sql.Date d2 = java.sql.Date.valueOf(strDate);
+			pstmt.setDate(5,d2);
+			
+			count = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
+	public int updateM_goods(M_goods goods) {
+		int count = 0;
+		String sql = """
+						update m_goods 
+						   set itemcode = ?
+						      ,itemname = ?
+						      ,supcode = ?
+						      ,price = ?
+						      ,update_date = ?
+						 where itemcode = ?
+					""";
+		try(PreparedStatement pstmt = conn.prepareStatement(sql);){
+			pstmt.setInt(1,goods.getItemcode());
+			pstmt.setInt(6,goods.getItemcode());
+			pstmt.setString(2, goods.getItemname());
+			pstmt.setInt(3, goods.getSupcode());
+			pstmt.setInt(4, goods.getPrice());
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+			String strDate = sf.format(goods.getUpdate_date());
+			java.sql.Date d2 = java.sql.Date.valueOf(strDate);
+			
+			pstmt.setDate(5,d2);
+			
+			count = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+			return -1;
+		}
+		return count;
+	}
+	
+	public int searchScode(int productNumber) {
+		int supCode = -1;
+		String sql = """
+				select supcode
+				  from m_goods
+				 where itemcode = ?
+				""";
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql);){
+			
+			pstmt.setInt(1,productNumber);
+			
+			ResultSet result = pstmt.executeQuery();
+			
+			while(result.next()) {
+				supCode = result.getInt("supcode");
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return supCode;
+		}
+		return supCode;
+	}
 }

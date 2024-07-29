@@ -32,6 +32,8 @@ public class M_goods {
 				.formatted(iCode,iName,sCode,price,date));
 	}
 	
+	
+	
 	public M_goods() {
 		
 	}
@@ -84,5 +86,4 @@ public class M_goods {
 		this.sup = sup;
 	}
 	
-
 }
