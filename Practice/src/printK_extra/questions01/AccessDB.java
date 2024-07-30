@@ -133,7 +133,8 @@ public class AccessDB {
 				ms.setAddress(address);
 				mg.setSup(ms);
 			}
-		}catch(SQLException e) {
+		}catch(SQLException |NullPointerException e) {
+			System.out.println("a");
 			e.printStackTrace();
 		}
 		return mg;

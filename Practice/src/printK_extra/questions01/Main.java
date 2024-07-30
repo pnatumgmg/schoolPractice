@@ -27,11 +27,12 @@ public class Main {
 		aDB.connect();
 		int productNumber = Integer.parseInt(strProductNumber);
 		M_goods mg = aDB.getGoods(productNumber);
-		if(mg == null) {
-			System.out.println("商品が登録されていません");
-		}else {
+		try{
 			goodsShow(mg);
+		}catch(NullPointerException e) {
+			System.out.println("登録されていません");
 		}
+		
 		//6
 		insertProduct(ams, amg, aDB);
 		//7
@@ -53,7 +54,7 @@ public class Main {
 		return ans;
 	}
 	
-	public static void goodsShow(M_goods mg) {
+	public static void goodsShow(M_goods mg) throws NullPointerException{
 		String productName = mg.getItemname();
 		int price = mg.getPrice();
 		String supName = mg.getSup().getSupname();
